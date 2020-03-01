@@ -13,6 +13,14 @@
 <body>
 
 <script>
+    dsBridge.register('created', function (res) {
+        return res;
+    })
+
+    dsBridge.register('updated', function (type, data) {
+        console.log(type + ': '+ JSON.stringify(data))
+        return true;
+    })
 
     dsBridge.register('addValue', function (r, l) {
         return r + l;

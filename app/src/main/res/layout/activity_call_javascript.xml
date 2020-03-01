@@ -19,6 +19,25 @@
             android:padding="16dp">
 
             <Button
+                android:id="@+id/updatedConfig"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="updated_config"
+                android:textAllCaps="false" />
+            <Button
+                android:id="@+id/updatedUser"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="updated_user"
+                android:textAllCaps="false" />
+            <Button
+                android:id="@+id/created"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="created"
+                android:textAllCaps="false" />
+
+            <Button
                 android:id="@+id/addValue"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

@@ -5,10 +5,13 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Toast;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import wendu.dsbridge.DWebView;
 import wendu.dsbridge.OnReturnValue;
+
+import android.util.Log;
 
 public class CallJavascriptActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -23,6 +26,9 @@ public class CallJavascriptActivity extends AppCompatActivity implements View.On
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_call_javascript);
+        getView(R.id.updatedConfig).setOnClickListener(this);
+        getView(R.id.updatedUser).setOnClickListener(this);
+        getView(R.id.created).setOnClickListener(this);
         getView(R.id.addValue).setOnClickListener(this);
         getView(R.id.append).setOnClickListener(this);
         getView(R.id.startTimer).setOnClickListener(this);
@@ -50,6 +56,30 @@ public class CallJavascriptActivity extends AppCompatActivity implements View.On
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
+            case R.id.updatedConfig:
+                JSONObject config = new JSONObject();
+                try { config.put("name", "张三"); } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                dWebView.callHandler("updated", new Object[]{"config", config}, new OnReturnValue<Boolean>() {
+                    @Override
+                    public void onValue(Boolean retValue) {
+                        showToast(retValue);
+                    }
+                });
+                break;
+            case R.id.updatedUser:
+                JSONObject user = new JSONObject();
+                try { user.put("name", "张三"); } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                dWebView.callHandler("updated", new Object[]{"user", user}, new OnReturnValue<Boolean>() {
+                    @Override
+                    public void onValue(Boolean retValue) {
+                        showToast(retValue);
+                    }
+                });
+                break;
             case R.id.addValue:
                 dWebView.callHandler("addValue", new Object[]{3, 4}, new OnReturnValue<Integer>() {
                     @Override

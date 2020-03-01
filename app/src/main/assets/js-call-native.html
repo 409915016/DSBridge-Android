@@ -8,6 +8,7 @@
     <meta name="viewport" content="width=device-width,initial-scale=0.5,user-scalable=no"/>
     <!--require dsbridge init js-->
     <script src="https://cdn.jsdelivr.net/npm/dsbridge/dist/dsbridge.js"> </script>
+    <script src="//cdn.jsdelivr.net/npm/eruda"></script>
 </head>
 <style>
     .btn {
@@ -28,6 +29,21 @@
 
 </style>
 <body>
+
+<div class="btn" onclick="created()">created</div>
+
+<div class="btn" onclick="updated_config()">updated_config</div>
+<div class="btn" onclick="updated_user()">update_user</div>
+
+<div class="btn" onclick="callContent()">Synchronous get Content</div>
+
+<div class="btn" onclick="newContent()">Synchronous newContent</div>
+
+<div class="btn" onclick="imageViewer()">Synchronous imageViewer</div>
+
+<div class="btn" onclick="share()">Synchronous share</div>
+
+
 <div class="btn" onclick="callSyn()">Synchronous call</div>
 <div class="btn" onclick="callAsyn()">Asynchronous call</div>
 <div class="btn" onclick="callNoArgSyn()">Sync call without argument</div>
@@ -43,6 +59,7 @@
 <div class="btn" onclick="hasNativeMethod('testSyn')">hasNativeMethod("testSyn")</div>
 
 <script>
+    eruda.init()
 
     function callSyn() {
         alert(dsBridge.call("testSyn", "testSyn"))
@@ -53,6 +70,55 @@
             alert(v)
         })
     }
+
+    function created(){
+        dsBridge.call("created", function (v) {
+            alert(v)
+        })
+    }
+
+    function imageViewer(){
+        const imagesObj   = {
+            current: "http://",
+            data   : ["http://...", "http://...", "http://..."]
+        };
+        dsBridge.call('imageViewer', imagesObj, function (res) {
+            alert(res)
+        })
+    }
+
+    function updated_config(){
+        dsBridge.call("updated", { type: "config", data: { version : '1.0.0'} }, function (v) {
+            alert(v)
+        })
+    }
+
+    function updated_user(){
+        dsBridge.call("updated", { type: "user", data: { username: 'Mather'} }, function (v) {
+            alert(v)
+        })
+    }
+
+    function callContent() {
+        dsBridge.call("content", "12", function (res) {
+            alert(typeof res)
+            alert(JSON.stringify(res))
+            console.log(JSON.stringify(res))
+        })
+    }
+
+    function newContent() {
+        dsBridge.call("newContent", "12", function (res) {
+            alert(res)
+        })
+    }
+
+    function share() {
+        dsBridge.call("share", "qq", function (res) {
+            alert(typeof res)
+        })
+    }
+
 
     function callAsyn_() {
         for (var i = 0; i < 2000; i++) {
@@ -106,3 +172,5 @@
 </script>
 </body>
 </html>
+
+
