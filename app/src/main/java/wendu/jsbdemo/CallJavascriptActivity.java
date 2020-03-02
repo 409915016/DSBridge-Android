@@ -57,11 +57,11 @@ public class CallJavascriptActivity extends AppCompatActivity implements View.On
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.updatedConfig:
-                JSONObject config = new JSONObject();
-                try { config.put("name", "张三"); } catch (JSONException e) {
+                JSONObject updateObj = new JSONObject();
+                try { updateObj.put("name", "config"); } catch (JSONException e) {
                     e.printStackTrace();
                 }
-                dWebView.callHandler("updated", new Object[]{"config", config}, new OnReturnValue<Boolean>() {
+                dWebView.callHandler("updated", new Object[]{ updateObj }, new OnReturnValue<Boolean>() {
                     @Override
                     public void onValue(Boolean retValue) {
                         showToast(retValue);
@@ -69,11 +69,11 @@ public class CallJavascriptActivity extends AppCompatActivity implements View.On
                 });
                 break;
             case R.id.updatedUser:
-                JSONObject user = new JSONObject();
-                try { user.put("name", "张三"); } catch (JSONException e) {
+                JSONObject _updateObj = new JSONObject();
+                try { _updateObj.put("name", "user"); } catch (JSONException e) {
                     e.printStackTrace();
                 }
-                dWebView.callHandler("updated", new Object[]{"user", user}, new OnReturnValue<Boolean>() {
+                dWebView.callHandler("updated", new Object[]{ _updateObj }, new OnReturnValue<Boolean>() {
                     @Override
                     public void onValue(Boolean retValue) {
                         showToast(retValue);

@@ -17,8 +17,8 @@
         return res;
     })
 
-    dsBridge.register('updated', function (type, data) {
-        console.log(type + ': '+ JSON.stringify(data))
+    dsBridge.register('updated', function (updatedObj) {
+        console.log('updatedObj: ' + JSON.stringify(updatedObj))
         return true;
     })
 
